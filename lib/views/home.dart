@@ -4,6 +4,7 @@ import 'package:riverpod_poc/models/todo.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:riverpod_poc/provider/todo_provider.dart';
+import 'package:uuid/uuid.dart';
 
 //*RIVERPOD EXAMPLE*
 
@@ -15,15 +16,23 @@ class Home extends ConsumerStatefulWidget {
 
 class _HomeState extends ConsumerState<Home> {
   final TextEditingController _title = TextEditingController();
-  int id = 0;
+ 
   @override
   void dispose() {
     _title.clear();
     super.dispose();
   }
+
+   String id = Uuid().v4(); // Generate a random UUID 
+  
+  void _generateNewUuid() { 
+    setState(() { 
+      id = Uuid().v4(); // Generate a new random UUID 
+    }); 
+  } 
   displayDialog({bool isEdit = false, Todo? todoo}) {
-     print(id);
-   
+    
+   _generateNewUuid();
     return showDialog(
       context: context,
       builder: (context) {

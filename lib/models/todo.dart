@@ -1,7 +1,7 @@
 
 
 class Todo {
-  int id;
+  String id;
   String title;
   DateTime date;
   bool completed;

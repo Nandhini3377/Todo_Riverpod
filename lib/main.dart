@@ -6,9 +6,6 @@ import 'package:riverpod_poc/views/home.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    //  ChangeNotifierProvider(create: (_)=>TodoProvider(),
-    //  child: MyApp(),
-    //  )
     ProviderScope(child: MyApp())
     ); 
 }
