@@ -23,6 +23,13 @@ class _HomeState extends ConsumerState<Home> {
     super.dispose();
   }
 
+  @override
+  void initState() {
+    ref.read(TodoPro).loadTodoList();
+    // TODO: implement initState
+    super.initState();
+  }
+
    String id = Uuid().v4(); // Generate a random UUID 
   
   void _generateNewUuid() { 
@@ -50,14 +57,14 @@ class _HomeState extends ConsumerState<Home> {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              onPressed: () {
+              onPressed: () async {
                 if (isEdit == true) {
                   ref.read(TodoPro.notifier).editTask(Todo(
                       id: todoo!.id, title: _title.text, date: todoo.date));
                   Navigator.of(context).pop();
                   _title.clear();
                 } else {
-                  ref.read(TodoPro).addItem(
+                  await ref.read(TodoPro).addTodo(
                       Todo(id: id, title: _title.text, date: DateTime.now()));
                   //ref.read(TodoPro).savedata();
                   Navigator.of(context).pop();
@@ -84,6 +91,7 @@ class _HomeState extends ConsumerState<Home> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor:Colors.deepPurple.shade100 ,
         title: Text("TODO APP USING RIVERPOD"),
       ),
       body: ListView.builder(
@@ -110,7 +118,7 @@ class _HomeState extends ConsumerState<Home> {
                 onPressed: () {
                   ref
                       .read(TodoPro.notifier)
-                      .deleteItem(riverpodPro.todoItem[index]);
+                      .deleteItem(riverpodPro.todoItem[index].id);
                 },
                 icon: const Icon(Icons.delete)),
           );

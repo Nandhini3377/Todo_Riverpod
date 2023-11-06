@@ -11,16 +11,16 @@ class Todo {
     completed=!completed;
   }
 
-  // factory Todo.fromJson(Map<String, dynamic> json) {
-  //   return Todo(title: json['title'],id: json['id'],date: json['date'],completed: json['completed']);
-  // }
+  factory Todo.fromJson(Map<String, dynamic> json) {
+    return Todo(title: json['title'],id: json['id'],  date: DateTime.parse(json['date'] as String),completed: json['completed']);
+  }
 
-  // Map<String,dynamic> toJson() {
-  //   return {
-  //     'id':id,
-  //     'title': title,
-  //     'date':date,
-  //     'completed' : completed 
-  //   };
-  // }
+  Map<String,dynamic> toJson() {
+    return {
+      'id':id,
+      'title': title,
+       'date': date.toString(),
+      'completed' : completed 
+    };
+  }
 }
